@@ -1,8 +1,6 @@
 import { createApi, retry, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-// #TODO
 
 const baseQuery = async (args: any, api: any, extraOptions: any) => {
-    const { dispatch } = api;
     const rawBaseQuery = fetchBaseQuery({
         baseUrl: import.meta.env.VITE_BASE_URL,
         prepareHeaders: (headers) => {
@@ -19,7 +17,7 @@ const baseQuery = async (args: any, api: any, extraOptions: any) => {
     if (response.error) {
         const { status } = response.error;
         if (status === 401 || status === 403) {
-            // dispatch(#TODO)
+        console.log("error")
         }
     }
 
