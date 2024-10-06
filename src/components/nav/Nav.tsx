@@ -1,15 +1,19 @@
 import { Link } from "react-router-dom";
 import { Container } from "../../utils";
 import { Tooltip } from 'antd';
+import Logo from "../../assets/images/logo.svg"
+import Search from "../../assets/images/search.svg"
+import Login from "../../assets/images/login.svg"
+import Cart from "../../assets/images/cart.svg"
 
 const Nav = () => {
     return (
         <header>
             <Container>
-                <div className="nav-bar-top" >
+                <div className="header-top" >
                     <ul className="flex justify-between items-center h-10 border-b border-[#ebebeb] text-[#212121]" >
                         <li className="hover:text-[#5b24c9] cursor-pointer font-fixel text-[14px] flex basis-1/4 flex-grow-0 items-center justify-start">
-                            <Tooltip overlayStyle={{ borderRadius: '1px' , maxWidth: '264px'}} placement="bottomRight" title="Мы доставляем парфюмерию и косметику бесплатно. Минимальная сумма заказов - 99 000 сумов">
+                            <Tooltip overlayStyle={{ borderRadius: '1px', maxWidth: '264px' }} placement="bottomRight" title="Мы доставляем парфюмерию и косметику бесплатно. Минимальная сумма заказов - 99 000 сумов">
                                 <span>Бесплатная доставка!</span>
                             </Tooltip>
                         </li>
@@ -30,8 +34,26 @@ const Nav = () => {
                         </li>
                     </ul>
                 </div>
-                <nav className="nav-bar-bottom" >
-
+                <nav className="header-middle flex justify-between items-center pt-[26px]" >
+                    <div className="flex basis-1/4 flex-grow-0 items-center justify-start" >
+                        <button><img src={Search} alt="" /></button>
+                    </div>
+                    <div className="flex flex-1 justify-center" >
+                        <img src={Logo} className="w-[190px]" alt="" />
+                    </div>
+                    <div className="flex basis-1/4 flex-grow-0 items-center justify-end" >
+                        <div className="flex justify-end gap-6 items-center pr-[8px]" >
+                            <button>
+                                <img className="w-[24px] h-[24px]" src={Login} alt="" />
+                            </button>
+                            <button>
+                                <img className="w-[24px] h-[24px]" src={Cart} alt="" />
+                            </button>
+                            {/* <button>
+                                <img className="w-[24px] h-[24px]" src={Login} alt="" />
+                            </button> */}
+                        </div>
+                    </div>
                 </nav>
             </Container>
         </header>
