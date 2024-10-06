@@ -1,3 +1,75 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+    font-family: 'PixelText';
+    src: url('/src/assets/fonts/PixelText-Black.woff2') format('woff2');
+    font-weight: 900;
+    font-style: normal;
+}
+.flex{
+    font-family: "PixelText";
+}
+@font-face {
+    font-family: 'PixelText';
+    src: url('/src/assets/fonts/PixelText-Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'PixelText';
+    src: url('/src/assets/fonts/PixelText-ExtraBold.woff2') format('woff2');
+    font-weight: 800;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'PixelText';
+    src: url('/src/assets/fonts/PixelText-ExtraLight.woff2') format('woff2');
+    font-weight: 200;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'PixelText';
+    src: url('/src/assets/fonts/PixelText-Light.woff2') format('woff2');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'PixelText';
+    src: url('/src/assets/fonts/PixelText-Medium.woff2') format('woff2');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'PixelText';
+    src: url('/src/assets/fonts/PixelText-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'PixelText';
+    src: url('/src/assets/fonts/PixelText-SemiBold.woff2') format('woff2');
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'PixelText';
+    src: url('/src/assets/fonts/PixelText-Thin.woff2') format('woff2');
+    font-weight: 100;
+    font-style: normal;
+}
+
+
+.container {
+    max-width: 1600px;
+    width: calc(100% - 96px);
+    margin: 0 auto;
+}

@@ -1,10 +1,12 @@
 import React from 'react';
-import Products from '../../components/products/Products';
+import Nav from '../../components/nav/Nav';
 
 const Home: React.FC = () => {
 
     return (
-                    
+        <>
+            <Nav/>
+        </>     
     );
 };
 

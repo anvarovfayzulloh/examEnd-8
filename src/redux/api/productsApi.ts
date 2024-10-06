@@ -5,7 +5,6 @@ const productsApi = api.injectEndpoints({
         getProduct: build.query({
             query: () => ({
                 url: "/products.json?limit=100",
-                
             }),
         }),
     }),
