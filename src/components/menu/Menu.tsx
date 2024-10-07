@@ -1,5 +1,5 @@
 import { Container } from "../../utils"
-import Loading from "../../assets/images/loading.gif"
+import { Link } from "react-router-dom"
 
 const Menu = () => {
     return (
@@ -7,38 +7,60 @@ const Menu = () => {
             <Container>
                 <div className="menu_wrapper" >
                     <ul className="flex justify-between items-center font-fixel font-semibold h-[46px]" >
-                        <li>
-                            Парфюмерия
+                        <li className="cursor-pointer" >
+                            <Link to={"/"} >
+                                Парфюмерия
+                            </Link>
                         </li>
-                        <li>
-                            Макияж
+                        <li className="cursor-pointer" >
+                            <Link to={"/"} >
+                                Макияж
+                            </Link>
                         </li>
-                        <li>
-                            Волосы
+                        <li className="cursor-pointer" >
+                            <Link to={"/"} >
+                                Волосы
+                            </Link>
                         </li>
-                        <li>
-                            Лицо
+                        <li className="cursor-pointer" >
+                            <Link to={"/"} >
+                                Лицо
+                            </Link>
                         </li>
-                        <li>
-                            Тело и ванна
+                        <li className="cursor-pointer" >
+                            <Link to={"/"} >
+                                Тело и ванна
+                            </Link>
                         </li>
-                        <li>
-                            Мужчинам
+                        <li className="cursor-pointer" >
+                            <Link to={"/"} >
+                                Мужчинам
+                            </Link>
                         </li>
-                        <li>
-                            Аксессуары
+                        <li className="cursor-pointer" >
+                            <Link to={"/"} >
+                                Аксессуары
+                            </Link>
                         </li>
-                        <li>
-                            Health & Care
+                        <li className="cursor-pointer" >
+                            <Link to={"/"} >
+                                Health & Care
+                            </Link>
                         </li>
-                        <li>
-                            Подарки
+                        <li className="cursor-pointer" >
+                            <Link to={"/"} >
+                                Подарки
+                            </Link>
                         </li>
-                        <li>
-                            Одежда
+                        <li className="cursor-pointer" >
+                            <Link to={"/"} >
+                                Одежда
+                            </Link>
                         </li>
-                        <li>
-                            Бренды
+                        <li className="cursor-pointer" >
+                            <Link to={"/"} >
+                                Бренды
+                            </Link>
                         </li>
                     </ul>
                 </div>

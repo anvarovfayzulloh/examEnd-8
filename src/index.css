@@ -1,7 +1,19 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.ant-carousel .slick-dots li button {
+    background-color: #d5d5d5;
+  }
+  
+  .ant-carousel .slick-dots li.slick-active button {
+    background-color: #000000;
+  }
+  
 @font-face {
     font-family: 'FixelText';
     src: url('/src/assets/fonts/FixelText-Black.woff2') format('woff2');

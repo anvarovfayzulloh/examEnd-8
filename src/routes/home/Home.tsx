@@ -1,6 +1,7 @@
 import React from 'react';
 import Nav from '../../components/nav/Nav';
 import Menu from '../../components/menu/Menu';
+import CarouselHeader from '../../components/slider/Slider';
 
 const Home: React.FC = () => {
 
@@ -8,6 +9,7 @@ const Home: React.FC = () => {
         <>
             <Nav/>
             <Menu/>
+            <CarouselHeader/>
         </>     
     );
 };
