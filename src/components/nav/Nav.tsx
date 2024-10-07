@@ -39,7 +39,7 @@ const Nav = () => {
                         <button><img src={Search} alt="" /></button>
                     </div>
                     <div className="flex flex-1 justify-center" >
-                        <img src={Logo} className="w-[190px]" alt="" />
+                        <Link to={"/"}><img className="w-[160px] h-auto" src={Logo} alt="" /></Link>
                     </div>
                     <div className="flex basis-1/4 flex-grow-0 items-center justify-end" >
                         <div className="flex justify-end gap-6 items-center pr-[8px]" >
