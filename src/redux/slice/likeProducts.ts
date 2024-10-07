@@ -9,7 +9,7 @@ const likedProductSlice = createSlice({
     initialState,
     reducers: {
        like:  (state, action) => {
-            
+            console.log(state, action)
         },
         unLike: (state, action) => {
             console.log(state, action)
