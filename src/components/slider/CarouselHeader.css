@@ -1,0 +1,8 @@
+.carousel-wrapper .carousel-arrow {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.carousel-wrapper:hover .carousel-arrow {
+    opacity: 1;
+}
