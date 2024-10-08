@@ -5,8 +5,10 @@ import Logo from "../../assets/images/logo.svg"
 import Search from "../../assets/images/search.svg"
 import Login from "../../assets/images/login.svg"
 import Cart from "../../assets/images/cart.svg"
+import { useLocation } from "react-router-dom";
 
 const Nav = () => {
+    const location = useLocation();
     return (
         <header>
             <Container>
@@ -19,13 +21,13 @@ const Nav = () => {
                         </li>
                         <ul className="flex justify-center items-center gap-5 cursor-pointer text-[14px]  flex-1" >
                             <li className="text-[#ff5252] font-fixel" >
-                                <Link to={"/"}>Акции</Link>
+                                <Link to={location}>Акции</Link>
                             </li>
                             <li className="hover:text-[#5b24c9] cursor-pointer font-fixel text-[14px]" >
-                                <Link to={"/"} >Доставка и Оплата</Link>
+                                <Link to={location} >Доставка и Оплата</Link>
                             </li>
                             <li className="hover:text-[#5b24c9] cursor-pointer font-fixel text-[14px]" >
-                                <Link to={"/"} >О магазине</Link>
+                                <Link to={location} >О магазине</Link>
                             </li>
                         </ul>
                         <li className="gap-2 hover:text-[#5b24c9] cursor-pointer font-fixel text-[14px] flex basis-1/4 flex-grow-0 items-center justify-end" >

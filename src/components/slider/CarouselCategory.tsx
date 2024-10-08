@@ -1,9 +1,10 @@
 import { Carousel, ConfigProvider } from 'antd';
-import Carousel_1 from "../../assets/images/carousel_1.jpg";
-import Carousel_2 from "../../assets/images/carousel_2.jpg";
-import Carousel_3 from "../../assets/images/carousel_3.jpg";
-import Carousel_4 from "../../assets/images/carousel_4.jpg";
-import Carousel_5 from "../../assets/images/carousel_5.jpg";
+import Carousel1_1 from "../../assets/images/carousel1_1.jpg";
+import Carousel1_2 from "../../assets/images/carousel1_2.jpg";
+import Carousel1_3 from "../../assets/images/carousel1_3.jpg";
+import Carousel1_4 from "../../assets/images/carousel1_4.jpg";
+import Carousel1_5 from "../../assets/images/carousel1_5.jpg";
+import Carousel1_6 from "../../assets/images/carousel1_6.jpg";
 import Arrow from "../../assets/images/arrow.svg";
 import { Container } from '../../utils';
 import { ArrowProps } from '../../types';
@@ -54,7 +55,7 @@ const CustomArrowRight: React.FC<ArrowProps> = ({ className, style, onClick }) =
     );
 };
 
-const CarouselHeader: React.FC = () => {
+const CarouselCategory: React.FC = () => {
     return (
         <Container>
             <div className="carousel-wrapper">
@@ -71,19 +72,22 @@ const CarouselHeader: React.FC = () => {
                 >
                     <Carousel pauseOnHover autoplay autoplaySpeed={2500} effect="fade" arrows={true} nextArrow={<CustomArrowRight />} prevArrow={<CustomArrowLeft />} >
                         <div>
-                            <img src={Carousel_1} alt="" />
+                            <img src={Carousel1_1} alt="" />
                         </div>
                         <div>
-                            <img src={Carousel_2} alt="" />
+                            <img src={Carousel1_2} alt="" />
                         </div>
                         <div>
-                            <img src={Carousel_3} alt="" />
+                            <img src={Carousel1_3} alt="" />
                         </div>
                         <div>
-                            <img src={Carousel_4} alt="" />
+                            <img src={Carousel1_4} alt="" />
                         </div>
                         <div>
-                            <img src={Carousel_5} alt="" />
+                            <img src={Carousel1_5} alt="" />
+                        </div>
+                        <div>
+                            <img src={Carousel1_6} alt="" />
                         </div>
                     </Carousel>
                 </ConfigProvider>
@@ -92,4 +96,4 @@ const CarouselHeader: React.FC = () => {
     );
 };
 
-export default CarouselHeader;
+export default CarouselCategory;

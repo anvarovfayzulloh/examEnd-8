@@ -22,7 +22,7 @@ const Categories = () => {
         <div className="mt-[32px] mx-auto" >
             <ul className="capitalize flex justify-center items-center gap-8" >
                 <li>
-                    <Link to={"/"} >
+                    <Link to={"/categories/powder"} >
                         <div className="w-[82px] h-[82px] p-3 border border-[#5b24c9] rounded-full" >
                             <img className="w-full h-full object-cover" src={Categories_1} alt="" />
                         </div>
@@ -32,99 +32,92 @@ const Categories = () => {
                     </Link>
                 </li>
                 <li>
-                    <Link to={"/"} >
+                    <Link to={"/categories/cream"} >
                         <div className="w-[82px] h-[82px] p-3 border border-[#5b24c9] rounded-full" >
                             <img className="w-full h-full object-cover" src={Categories_2} alt="" />
                         </div>
                         <p className="mt-2 font-fixel text-[12px] whitespace-nowrap overflow-hidden text-ellipsis text-center w-full font-normal" >
-                            Bronzer
+                            Cream
                         </p>
                     </Link>
                 </li>
                 <li>
-                    <Link to={"/"} >
+                    <Link to={"/categories/pencil"} >
                         <div className="w-[82px] h-[82px] p-3 border border-[#5b24c9] rounded-full" >
                             <img className="w-full h-full object-cover" src={Categories_3} alt="" />
                         </div>
                         <p className="mt-2 font-fixel text-[12px] whitespace-nowrap overflow-hidden text-ellipsis text-center w-full font-normal" >
-
-                            Eyebrow
+                            Pencil
                         </p>
                     </Link>
                 </li>
                 <li>
-                    <Link to={"/"} >
+                    <Link to={"/categories/liquid"} >
                         <div className="w-[82px] h-[82px] p-3 border border-[#5b24c9] rounded-full" >
                             <img className="w-full h-full object-cover" src={Categories_4} alt="" />
                         </div>
                         <p className="mt-2 font-fixel text-[12px] whitespace-nowrap overflow-hidden text-ellipsis text-center w-full font-normal" >
-
-                            Eyeliner
+                            Liquid
                         </p>
                     </Link>
                 </li>
                 <li>
-                    <Link to={"/"} >
+                    <Link to={"/categories/gel"} >
                         <div className="w-[82px] h-[82px] p-3 border border-[#5b24c9] rounded-full" >
                             <img className="w-full h-full object-cover" src={Categories_5} alt="" />
                         </div>
                         <p className="mt-2 font-fixel text-[12px] whitespace-nowrap overflow-hidden text-ellipsis text-center w-full font-normal" >
-
-                            Eyeshadow
+                            Gel
                         </p>
                     </Link>
                 </li>
                 <li>
-                    <Link to={"/"} >
+                    <Link to={"/categories/palette"} >
                         <div className="w-[82px] h-[82px] p-3 border border-[#5b24c9] rounded-full" >
                             <img className="w-full h-full object-cover" src={Categories_6} alt="" />
                         </div>
                         <p className="mt-2 font-fixel text-[12px] whitespace-nowrap overflow-hidden text-ellipsis text-center w-full font-normal" >
-
-                            Foundation
+                            Palette
                         </p>
                     </Link>
                 </li>
                 <li>
-                    <Link to={"/"} >
+                    <Link to={"/categories/concealer"} >
                         <div className="w-[82px] h-[82px] p-3 border border-[#5b24c9] rounded-full" >
                             <img className="w-full h-full object-cover" src={Categories_7} alt="" />
                         </div>
                         <p className="mt-2 font-fixel text-[12px] whitespace-nowrap overflow-hidden text-ellipsis text-center w-full font-normal" >
-
-                            Lip liner
+                            Concealer
                         </p>
                     </Link>
                 </li>
                 <li>
-                    <Link to={"/"} >
+                    <Link to={"/categories/contour"} >
                         <div className="w-[82px] h-[82px] p-3 border border-[#5b24c9] rounded-full" >
                             <img className="w-full h-full object-cover" src={Categories_8} alt="" />
                         </div>
                         <p className="mt-2 font-fixel text-[12px] whitespace-nowrap overflow-hidden text-ellipsis text-center w-full font-normal" >
-
-                            Lipstick
+                            Contour
                         </p>
                     </Link>
                 </li>
                 <li>
-                    <Link to={"/"} >
+                    <Link to={"/categories/bb%20cc"} >
                         <div className="w-[82px] h-[82px] p-3 border border-[#5b24c9] rounded-full" >
                             <img className="w-full h-full object-cover" src={Categories_9} alt="" />
                         </div>
                         <p className="mt-2 font-fixel text-[12px] whitespace-nowrap overflow-hidden text-ellipsis text-center w-full font-normal" >
-
-                            Mascara
+                            Bb cc
                         </p>
                     </Link>
                 </li>
                 <li>
-                    <Link to={"/"} >
+                    <Link to={"/categories/mineral"} >
                         <div className="w-[82px] h-[82px] p-3 border border-[#5b24c9] rounded-full" >
                             <img className="w-full h-full object-cover" src={Categories_10} alt="" />
                         </div>
                         <p className="mt-2 font-fixel text-[12px] whitespace-nowrap overflow-hidden text-ellipsis text-center w-full font-normal" >
-                            Nail polish
+                            Mineral
                         </p>
                     </Link>
                 </li>
