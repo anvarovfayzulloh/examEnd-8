@@ -5,6 +5,7 @@ import Logo from "../../assets/images/logo.svg"
 import Search from "../../assets/images/search.svg"
 import Login from "../../assets/images/login.svg"
 import Cart from "../../assets/images/cart.svg"
+import Favorites from "../../assets/images/favorites.svg"
 import { useLocation } from "react-router-dom";
 
 const Nav = () => {
@@ -49,11 +50,11 @@ const Nav = () => {
                                 <img className="w-[24px] h-[24px]" src={Login} alt="" />
                             </button>
                             <button>
+                                <img className="w-[24px] h-[24px]" src={Favorites} alt="" />
+                            </button>
+                            <button>
                                 <img className="w-[24px] h-[24px]" src={Cart} alt="" />
                             </button>
-                            {/* <button>
-                                <img className="w-[24px] h-[24px]" src={Login} alt="" />
-                            </button> */}
                         </div>
                     </div>
                 </nav>

@@ -9,7 +9,7 @@ const Popbrands = () => {
     const [products, setProducts] = useState(undefined);
 
     useEffect(() => {
-        setProducts(data)
+        setProducts(data?.slice(0, 20))
     },[data])
     useEffect(() => {
         console.log(products)
@@ -20,7 +20,7 @@ const Popbrands = () => {
 
   return (
     <div>
-        <Card  products={products}/>
+        <Card products={products}/>
     </div>
   )
 }
