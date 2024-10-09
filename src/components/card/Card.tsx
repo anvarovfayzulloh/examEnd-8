@@ -7,20 +7,19 @@ import Arrow from "../../assets/images/arrow-black.svg";
 import Favorite from "../../assets/images/favorite.svg";
 import { useDispatch, useSelector } from 'react-redux';
 import { like, unLike } from '../../redux/slice/likeProducts';
-import { AppDispatch, RootState } from '../../redux/store'; // Import RootState
+import { AppDispatch, RootState } from '../../redux/store';
 
 const CustomArrowLeft: React.FC<ArrowProps> = ({ className, style, onClick }) => (
     <div
         className={`left ${className}`}
         style={{
             padding: "10px",
-            ...style,
             background: "white",
             width: '50px',
             height: '50px',
             position: 'absolute',
             top: '-75px',
-            left: '1470px',
+            left: '1200px',
             transform: 'rotate(180deg)',
             cursor: 'pointer',
             zIndex: 10,
@@ -34,7 +33,6 @@ const CustomArrowRight: React.FC<ArrowProps> = ({ className, style, onClick }) =
     <div
         className={`right ${className}`}
         style={{
-            ...style,
             padding: "10px",
             background: "white",
             width: '50px',
@@ -52,7 +50,7 @@ const CustomArrowRight: React.FC<ArrowProps> = ({ className, style, onClick }) =
 
 const CarouselCategory: React.FC<{ products: any }> = ({ products }) => {
     const dispatch = useDispatch<AppDispatch>(); 
-    const likedProducts = useSelector((state: RootState) => state.wishlist.liked); // Use RootState to specify the type
+    const likedProducts = useSelector((state: RootState) => state.wishlist.liked);
 
     const handleLike = (id: string) => {
         dispatch(like(id));
@@ -65,13 +63,7 @@ const CarouselCategory: React.FC<{ products: any }> = ({ products }) => {
     return (
         <Container>
             <div className="my-[200px]">
-                <ConfigProvider
-                    theme={{
-                        components: {
-                            Carousel: {},
-                        },
-                    }}
-                >
+                <ConfigProvider>
                     <Carousel
                         infinite
                         dots={false}
@@ -84,15 +76,25 @@ const CarouselCategory: React.FC<{ products: any }> = ({ products }) => {
                         {products?.map((item: any) => {
                             const isLiked = likedProducts.includes(item.id);
                             return (
-                                <div key={item.id} className="w-[300px] max-h-[352px] flex flex-col relative px-[10px] group">
-                                    <div className='w-full h-full px-[40px] py-[24px] flex justify-center items-center cursor-pointer bg-[#FAFAFA] relative'>
-                                        <img className='h-full' src={item.api_featured_image} alt={item.name} />
-                                        <button onClick={() => isLiked ? handleUnlike(item.id) : handleLike(item.id)}>
-                                            <img className={`absolute top-3 right-4 w-6 h-6 transition-opacity duration-200 ${isLiked ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`} src={Favorite} alt="Favorite" />
-                                        </button>
+                                <div key={item.id} className="w-[300px] max-h-[400px] flex flex-col relative px-[10px] group">
+                                    <div className="relative w-full h-[250px] px-[20px] py-[20px] bg-[#FAFAFA] flex justify-center items-center cursor-pointer group-hover:bg-[#F5F5F5]">
+                                        <img className="h-full" src={item.api_featured_image} alt={item.name} />
+                                        
+                                        {/* Like and Buy buttons only visible on hover */}
+                                        <div className="absolute inset-0 flex justify-between items-start p-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                            <button onClick={() => isLiked ? handleUnlike(item.id) : handleLike(item.id)}>
+                                                <img className="w-6 h-6" src={Favorite} alt="Favorite" />
+                                            </button>
+                                            <button className="px-4 py-2 bg-blue-500 text-white text-sm rounded-md">
+                                                Купить
+                                            </button>
+                                        </div>
                                     </div>
-                                    <p className='capitalize font-fixel font-normal text-[16px] hover:text-[#5b24c9]'>
+                                    <p className="mt-4 font-semibold text-sm text-center capitalize hover:text-[#5b24c9] transition-colors">
                                         {item.name}
+                                    </p>
+                                    <p className="text-center text-gray-600 mt-1">
+                                        {item.price} {item.currency}
                                     </p>
                                 </div>
                             );
