@@ -2,7 +2,6 @@ import React from 'react';
 import { Carousel, ConfigProvider } from 'antd';
 import { Container } from '../../utils';
 import { ArrowProps } from '../../types';
-import '../slider/CarouselHeader.css';
 import Arrow from "../../assets/images/arrow-black.svg";
 import Favorite from "../../assets/images/favorite.svg";
 import { useDispatch, useSelector } from 'react-redux';
@@ -76,26 +75,45 @@ const CarouselCategory: React.FC<{ products: any }> = ({ products }) => {
                         {products?.map((item: any) => {
                             const isLiked = likedProducts.includes(item.id);
                             return (
-                                <div key={item.id} className="w-[300px] max-h-[400px] flex flex-col relative px-[10px] group">
-                                    <div className="relative w-full h-[250px] px-[20px] py-[20px] bg-[#FAFAFA] flex justify-center items-center cursor-pointer group-hover:bg-[#F5F5F5]">
+                                <div key={item.id} className="w-[300px] max-h-[450px] flex flex-col relative px-[10px] group">
+                                    {/* Image & Hover Like Button */}
+                                    <div className="relative w-full h-[250px] bg-[#FAFAFA] flex justify-center items-center cursor-pointer group-hover:bg-[#F5F5F5]">
                                         <img className="h-full" src={item.api_featured_image} alt={item.name} />
                                         
-                                        {/* Like and Buy buttons only visible on hover */}
-                                        <div className="absolute inset-0 flex justify-between items-start p-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                            <button onClick={() => isLiked ? handleUnlike(item.id) : handleLike(item.id)}>
-                                                <img className="w-6 h-6" src={Favorite} alt="Favorite" />
-                                            </button>
-                                            <button className="px-4 py-2 bg-blue-500 text-white text-sm rounded-md">
-                                                Купить
-                                            </button>
+                                        {/* Like Button only on hover */}
+                                        <button 
+                                            className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                                            onClick={() => isLiked ? handleUnlike(item.id) : handleLike(item.id)}
+                                        >
+                                            <img className="w-6 h-6" src={Favorite} alt="Favorite" />
+                                        </button>
+                                    </div>
+                                    
+                                    {/* Product Information */}
+                                    <div className="flex flex-col items-start p-2">
+                                        {/* Name */}
+                                        <p className="capitalize font-bold text-[14px] text-left text-[#333]">
+                                            {item.name}
+                                        </p>
+                                        {/* Rating */}
+                                        <p className="text-yellow-500 text-sm mt-1">
+                                            ★★★★☆ 175
+                                        </p>
+                                        {/* Prices */}
+                                        <div className="mt-2 flex items-center space-x-2">
+                                            <p className="text-red-500 font-bold text-lg">
+                                                522000 сум
+                                            </p>
+                                            <p className="line-through text-gray-500 text-sm">
+                                                533000 сум
+                                            </p>
                                         </div>
                                     </div>
-                                    <p className="mt-4 font-semibold text-sm text-center capitalize hover:text-[#5b24c9] transition-colors">
-                                        {item.name}
-                                    </p>
-                                    <p className="text-center text-gray-600 mt-1">
-                                        {item.price} {item.currency}
-                                    </p>
+
+                                    {/* Buy Button */}
+                                    <button className="w-full py-2 mt-auto bg-[#333] text-white text-sm text-center font-semibold hover:bg-[#555]">
+                                        Купить
+                                    </button>
                                 </div>
                             );
                         })}
