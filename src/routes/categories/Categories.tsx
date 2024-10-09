@@ -5,7 +5,6 @@ import Banner_1 from "../../components/banners/Banner_1"
 import Banner_2 from "../../components/banners/Banner_2"
 import Nav from "../../components/nav/Nav"
 import Menu from "../../components/menu/Menu"
-import CarouselCategory from "../../components/slider/CarouselCategory"
 
 
 const Categories = () => {

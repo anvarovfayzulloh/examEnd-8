@@ -1,5 +1,3 @@
-import { useEffect } from "react";
-import { useGetProductQuery } from "../../redux/api/productsApi"
 import { Link } from "react-router-dom";
 import Categories_1 from "../../assets/images/categories_1.png"
 import Categories_2 from "../../assets/images/categories_2.jfif"
@@ -14,10 +12,6 @@ import Categories_10 from "../../assets/images/categories_10.png"
 
 
 const Categories = () => {
-    const { data } = useGetProductQuery(undefined);
-    useEffect(() => {
-        console.log(data)
-    }, [data])
     return (
         <div className="mt-[32px] mx-auto" >
             <ul className="capitalize flex justify-center items-center gap-8" >
