@@ -13,7 +13,7 @@ const Categories = () => {
    const [products, setProducts] = useState([])
    useEffect(()=> {
        setProducts(data)
-       console.log(data)
+       console.log(data, products)
    }, [data])
 
    const [number, setNumber] = useState(0)
