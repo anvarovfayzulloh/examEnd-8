@@ -10,7 +10,6 @@ import Categories_8 from "../../assets/images/categories_8.png"
 import Categories_9 from "../../assets/images/categories_9.jfif"
 import Categories_10 from "../../assets/images/categories_10.png"
 
-
 const Categories = () => {
     return (
         <div className="mt-[32px] mx-auto" >

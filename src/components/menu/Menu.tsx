@@ -18,7 +18,7 @@ const Menu = () => {
     <div className="menu pt-[20px] relative">
       <Container>
         <div className="menu_wrapper">
-          <ul className={`flex justify-between items-center font-fixel font-semibold h-[46px] ${hoveredItem === 0 ? '' : 'border-b border-b-[#5b24c9]'}`}>
+          <ul className={`flex justify-between items-center font-fixel font-semibold h-[46px] border-b  ${hoveredItem === 0 ? '' : 'border-b border-b-[#5b24c9]'}`}>
             <li
               className="cursor-pointer relative hover:text-[#5b24c9] font-fixel font-semibold text-[16px]"
               onMouseEnter={() => handleMouseEnter(1)}
@@ -97,58 +97,58 @@ const Menu = () => {
               <Link to={location}>Бренды</Link>
             </li>
             {hoveredItem === 1 && (
-              <div className="absolute w-full max-w-[1600px] top-[100%] p-4 bg-white shadow-lg">
-                Дополнительная информация для Бренды
+              <div className="absolute w-full max-w-[1600px] top-[100%] p-4 bg-white shadow-lg z-[2000]">
+                Простите по вашему запросу ничего не найдено
               </div>
             )}
             {hoveredItem === 2 && (
-              <div className="absolute w-full max-w-[1600px] top-[100%] p-4 bg-white shadow-lg">
-                Дополнительная информация для Бренды
+              <div className="absolute w-full max-w-[1600px] top-[100%] p-4 bg-white shadow-lg z-[2000]">
+                Простите по вашему запросу ничего не найдено
               </div>
             )}
             {hoveredItem === 3 && (
-              <div className="absolute w-full max-w-[1600px] top-[100%] p-4 bg-white shadow-lg">
-                Дополнительная информация для Бренды
+              <div className="absolute w-full max-w-[1600px] top-[100%] p-4 bg-white shadow-lg z-[2000]">
+                Простите по вашему запросу ничего не найдено
               </div>
             )}
             {hoveredItem === 4 && (
-              <div className="absolute w-full max-w-[1600px] top-[100%] p-4 bg-white shadow-lg">
-                Дополнительная информация для Бренды
+              <div className="absolute w-full max-w-[1600px] top-[100%] p-4 bg-white shadow-lg z-[2000]">
+                Простите по вашему запросу ничего не найдено
               </div>
             )}
             {hoveredItem === 5 && (
-              <div className="absolute w-full max-w-[1600px] top-[100%] p-4 bg-white shadow-lg">
-                Дополнительная информация для Бренды
+              <div className="absolute w-full max-w-[1600px] top-[100%] p-4 bg-white shadow-lg z-[2000]">
+                Простите по вашему запросу ничего не найдено
               </div>
             )}
             {hoveredItem === 6 && (
-              <div className="absolute w-full max-w-[1600px] top-[100%] p-4 bg-white shadow-lg">
-                Дополнительная информация для Бренды
+              <div className="absolute w-full max-w-[1600px] top-[100%] p-4 bg-white shadow-lg z-[2000]">
+                Простите по вашему запросу ничего не найдено
               </div>
             )}
             {hoveredItem === 7 && (
-              <div className="absolute w-full max-w-[1600px] top-[100%] p-4 bg-white shadow-lg">
-                Дополнительная информация для Бренды
+              <div className="absolute w-full max-w-[1600px] top-[100%] p-4 bg-white shadow-lg z-[2000]">
+                Простите по вашему запросу ничего не найдено
               </div>
             )}
             {hoveredItem === 8 && (
-              <div className="absolute w-full max-w-[1600px] top-[100%] p-4 bg-white shadow-lg">
-                Дополнительная информация для Бренды
+              <div className="absolute w-full max-w-[1600px] top-[100%] p-4 bg-white shadow-lg z-[2000]">
+                Простите по вашему запросу ничего не найдено
               </div>
             )}
             {hoveredItem === 9 && (
-              <div className="absolute w-full max-w-[1600px] top-[100%] p-4 bg-white shadow-lg">
-                Дополнительная информация для Бренды
+              <div className="absolute w-full max-w-[1600px] top-[100%] p-4 bg-white shadow-lg z-[2000]">
+                Простите по вашему запросу ничего не найдено
               </div>
             )}
             {hoveredItem === 10 && (
-              <div className="absolute w-full max-w-[1600px] top-[100%] p-4 bg-white shadow-lg">
-                Дополнительная информация для Бренды
+              <div className="absolute w-full max-w-[1600px] top-[100%] p-4 bg-white shadow-lg z-[2000]">
+                Простите по вашему запросу ничего не найдено
               </div>
             )}
             {hoveredItem === 11 && (
-              <div className="absolute w-full max-w-[1600px] top-[100%] p-4 bg-white shadow-lg">
-                Дополнительная информация для Бренды
+              <div className="absolute w-full max-w-[1600px] top-[100%] p-4 bg-white shadow-lg z-[2000]">
+                Простите по вашему запросу ничего не найдено
               </div>
             )}
           </ul>

@@ -12,7 +12,12 @@ const productsApi = api.injectEndpoints({
                 url: `/products.json?product_category=${category}`,
             }),
         }),
+        getProductWithBrands: build.query({
+            query: (brand) => ({
+                url: `/products.json?brand=${brand}`,
+            }),
+        }),
     }),
 });
 
-export const { useGetProductQuery, useGetProductWithCategoriesQuery } = productsApi;
+export const { useGetProductQuery, useGetProductWithCategoriesQuery, useGetProductWithBrandsQuery } = productsApi;
