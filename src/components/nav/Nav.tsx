@@ -7,9 +7,21 @@ import Login from "../../assets/images/login.svg"
 import Cart from "../../assets/images/cart.svg"
 import Favorites from "../../assets/images/favorites.svg"
 import { useLocation } from "react-router-dom";
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../redux/store/index';
+import { setCurrency } from '../../redux/slice/currencySlice';
+
+
 
 const Nav = () => {
     const location = useLocation();
+
+    const dispatch = useDispatch();
+    const currency = useSelector((state: RootState) => state.currency.currency);
+
+    const handleCurrencyChange = (newCurrency: string) => {
+        dispatch(setCurrency(newCurrency));
+    };
     return (
         <header>
             <Container>
@@ -55,6 +67,11 @@ const Nav = () => {
                             <button>
                                 <img className="w-[24px] h-[24px]" src={Cart} alt="" />
                             </button>
+                            <select value={currency} onChange={(e) => handleCurrencyChange(e.target.value)}>
+                                <option value="£">£</option>
+                                <option value="UZS">UZS</option>
+                                <option value="RUBL">RUBL</option>
+                            </select>
                         </div>
                     </div>
                 </nav>

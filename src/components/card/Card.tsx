@@ -1,5 +1,4 @@
-import { FcLike } from "react-icons/fc";
-import { FcLikePlaceholder } from "react-icons/fc";
+import { FcLike, FcLikePlaceholder } from "react-icons/fc";
 import React from 'react';
 import { Carousel, ConfigProvider } from 'antd';
 import { Container } from '../../utils';
@@ -9,6 +8,7 @@ import Arrow from "../../assets/images/arrow-black.svg";
 import { useDispatch, useSelector } from 'react-redux';
 import { like, unLike } from '../../redux/slice/likeProducts';
 import { AppDispatch, RootState } from '../../redux/store';
+import useCurrency from "../../hooks/useHooks";
 
 const CustomArrowLeft: React.FC<ArrowProps> = ({ className, style, onClick }) => (
     <div
@@ -35,7 +35,6 @@ const CustomArrowRight: React.FC<ArrowProps> = ({ className, style, onClick }) =
     <div
         className={`right ${className}`}
         style={{
-            ...style,
             padding: "10px",
             background: "white",
             width: '50px',
@@ -51,7 +50,16 @@ const CustomArrowRight: React.FC<ArrowProps> = ({ className, style, onClick }) =
     </div>
 );
 
-const CarouselCategory: React.FC<{ products: any }> = ({ products }) => {
+interface Product {
+    id: string;
+    api_featured_image: string;
+    name: string;
+    product_type: string;
+    price: number;
+    rating: number | null;
+}
+
+const CarouselCategory: React.FC<{ products: Product[] }> = ({ products }) => {
     const dispatch = useDispatch<AppDispatch>();
     const likedProducts = useSelector((state: RootState) => state.wishlist.liked);
 
@@ -82,38 +90,46 @@ const CarouselCategory: React.FC<{ products: any }> = ({ products }) => {
                         nextArrow={<CustomArrowRight />}
                         prevArrow={<CustomArrowLeft />}
                     >
-                        {products?.map((item: any) => {
+                        {products?.map((item) => {
                             const isLiked = likedProducts.includes(item.id);
+                            const { currency, convertPrice } = useCurrency(item.price);
                             return (
-                                <div
-                                key={item.id}
-                                >
-                                    <div
-                                    className="relative group p-[40px] w-[300px] h-[400px]" 
-                                >
-                                    <div className='relative flex justify-center items-center bg-[#fafafa] w-full h-full p-[40px]'>
-                                        <img
-                                            className='object-center object-cover w-full h-full' 
-                                            src={item.api_featured_image}
-                                            alt={item.name}
-                                        />
-                                        <button
-                                            onClick={() => isLiked ? handleUnlike(item.id) : handleLike(item.id)}
-                                            aria-label={isLiked ? 'Unlike product' : 'Like product'}
-                                        >
-                                            {
-                                                isLiked
-                                                    ?
-                                                    <FcLike className={`absolute top-2 right-3 w-6 h-6 transition-opacity duration-200 ${isLiked ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`} />
-                                                    :
-                                                    <FcLikePlaceholder className={`absolute top-2 right-3 w-6 h-6 transition-opacity duration-200 ${isLiked ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`} />
-                                            }
-                                        </button>
+                                <div key={item.id}>
+                                    <div className="relative group p-[40px] w-[300px] h-[400px] pb-[5px]">
+                                        <div className='relative flex justify-center items-center bg-[#fafafa] w-full h-full p-[40px]'>
+                                            <img className='object-center object-cover w-full h-full' src={item.api_featured_image} alt={item.name} />
+                                            <button
+                                                onClick={() => isLiked ? handleUnlike(item.id) : handleLike(item.id)}
+                                                aria-label={isLiked ? 'Unlike product' : 'Like product'}
+                                            >
+                                                {
+                                                    isLiked
+                                                        ? <FcLike className={`absolute top-2 right-3 w-6 h-6 transition-opacity duration-200 ${isLiked ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`} />
+                                                        : <FcLikePlaceholder className={`absolute top-2 right-3 w-6 h-6 transition-opacity duration-200 ${isLiked ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`} />
+                                                }
+                                            </button>
+                                        </div>
                                     </div>
-                                </div>
-                                <p className="font-fixel text-[16px] " >
-                                    {item.name}
-                                </p>
+                                    <p className="font-fixel text-[16px] overflow-hidden whitespace-nowrap text-ellipsis pr-[61px] pl-[40px]">
+                                        {item.name}
+                                    </p>
+                                    <p className="mt-1 text-[#727178] text-[14px] break-words font-fixel pl-[40px] capitalize">
+                                        {item.product_type.split("_").join(" ")}
+                                    </p>
+                                    <div className="pl-[40px] mb-[5px]">
+                                        <div className="text-[10px] text-[#000] font-fixel mt-[5px]">
+                                            {[...Array(5)].map((_, index) => (
+                                                <span key={index}>
+                                                    {index < (item.rating === null ? 0 : item.rating) ? "★" : "☆"}
+                                                </span>
+                                            ))}
+                                            <span>{item.rating === null ? 0 : item.rating}</span>
+                                        </div>
+                                        <p className="font-fixel text-[16px] mt-[5px]">
+                                            {convertPrice()} {currency}
+                                        </p>
+                                    </div>
+                                    <button className="group opacity-0 group-hover:opacity-100">Click</button>
                                 </div>
                             );
                         })}
