@@ -17,7 +17,12 @@ const productsApi = api.injectEndpoints({
                 url: `/products.json?brand=${brand}`,
             }),
         }),
+        getProductWithId: build.query({
+            query: (id) => ({
+                url: `/products/${id}.json`,
+            }),
+        }),
     }),
 });
 
-export const { useGetProductQuery, useGetProductWithCategoriesQuery, useGetProductWithBrandsQuery } = productsApi;
+export const { useGetProductQuery, useGetProductWithCategoriesQuery, useGetProductWithBrandsQuery,useGetProductWithIdQuery } = productsApi;

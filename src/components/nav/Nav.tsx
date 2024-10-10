@@ -68,9 +68,9 @@ const Nav = () => {
                             <button onClick={() => console.log("Login clicked")}>
                                 <img className="w-[24px] h-[24px]" src={Login} alt="Login" />
                             </button>
-                            <button onClick={() => console.log("Favorites clicked")}>
+                            <Link to={"/favorites"} onClick={() => console.log("Favorites clicked")}>
                                 <img className="w-[24px] h-[24px]" src={Favorites} alt="Favorites" />
-                            </button>
+                            </Link>
                             <button onClick={handleCartView}>
                                 <img className="w-[24px] h-[24px]" src={CartImg} alt="Cart" />
                             </button>
