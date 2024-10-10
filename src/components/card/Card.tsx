@@ -2,9 +2,9 @@ import { FcLike, FcLikePlaceholder } from "react-icons/fc";
 import React, { useState } from 'react';
 import { Carousel, ConfigProvider } from 'antd';
 import { Container } from '../../utils';
-import { ArrowProps } from '../../types';
+import { ArrowProps, Product } from '../../types'; 
 import '../slider/CarouselHeader.css';
-import Arrow from "../../assets/images/arrow-black.svg"
+import Arrow from "../../assets/images/arrow-black.svg";
 import { useDispatch, useSelector } from 'react-redux';
 import { like, unLike } from '../../redux/slice/likeProducts';
 import { addCart } from '../../redux/slice/addCartSlice';
@@ -28,7 +28,8 @@ const CustomArrowLeft: React.FC<ArrowProps> = ({ className, style, onClick }) =>
             cursor: 'pointer',
             zIndex: 10,
         }}
-        onClick={onClick}>
+        onClick={onClick}
+    >
         <img className='w-full h-full' src={Arrow} alt="Left arrow" />
     </div>
 );
@@ -47,20 +48,11 @@ const CustomArrowRight: React.FC<ArrowProps> = ({ className, onClick }) => (
             cursor: 'pointer',
             zIndex: 10,
         }}
-        onClick={onClick}>
+        onClick={onClick}
+    >
         <img className='w-full h-full' src={Arrow} alt="Right arrow" />
     </div>
 );
-
-interface Product {
-    id: string;
-    api_featured_image: string;
-    name: string;
-    product_type: string;
-    price: number;
-    rating: number | null;
-    product_colors: { hex_value: string, colour_name: string }[];
-}
 
 const CarouselCategory: React.FC<{ products: Product[] }> = ({ products }) => {
     const dispatch = useDispatch<AppDispatch>();
@@ -83,13 +75,7 @@ const CarouselCategory: React.FC<{ products: Product[] }> = ({ products }) => {
     return (
         <Container>
             <div className="my-[100px]">
-                <ConfigProvider
-                    theme={{
-                        components: {
-                            Carousel: {},
-                        },
-                    }}
-                >
+                <ConfigProvider>
                     <Carousel
                         infinite
                         dots={false}
@@ -102,15 +88,16 @@ const CarouselCategory: React.FC<{ products: Product[] }> = ({ products }) => {
                         {products.map((item) => {
                             const isLiked = likedProducts.includes(item.id);
 
+                            // `useCurrency` is called unconditionally for every product
                             const { currency, convertPrice } = useCurrency(item.price);
-                            const convertedPrice = convertPrice();
 
-                            const selectedColor = selectedColors[item.id] || item.product_colors[0]?.hex_value;
+                            // Ensure `selectedColor` is always set
+                            const selectedColor = selectedColors[item.id] || item.product_colors[0]?.hex_value || '';
 
                             return (
                                 <div key={item.id}>
                                     <div className="relative group p-[40px] w-[300px] h-[400px] pb-[5px]">
-                                        <Link to={`/details/${item.id}`} className='relative flex justify-center items-center bg-[#fafafa] w-full h-full p-[40px] '>
+                                        <div className='relative flex justify-center items-center bg-[#fafafa] w-full h-full p-[40px]'>
                                             <img className='object-center object-cover w-full h-full' src={item.api_featured_image} alt={item.name} />
                                             <button
                                                 onClick={() => isLiked ? handleUnlike(item.id) : handleLike(item.id)}
@@ -122,7 +109,7 @@ const CarouselCategory: React.FC<{ products: Product[] }> = ({ products }) => {
                                                         : <FcLikePlaceholder className={`absolute top-2 right-3 w-6 h-6 transition-opacity duration-200 ${isLiked ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`} />
                                                 }
                                             </button>
-                                        </Link>
+                                        </div>
                                     </div>
                                     <p className="font-fixel text-[16px] overflow-hidden whitespace-nowrap text-ellipsis pr-[61px] pl-[40px]">
                                         {item.name}
@@ -134,13 +121,13 @@ const CarouselCategory: React.FC<{ products: Product[] }> = ({ products }) => {
                                         <div className="text-[10px] text-[#000] font-fixel mt-[5px]">
                                             {[...Array(5)].map((_, index) => (
                                                 <span key={index}>
-                                                    {index < (item.rating === null ? 0 : item.rating) ? "★" : "☆"}
+                                                    {index < (item.rating ?? 0) ? "★" : "☆"}
                                                 </span>
                                             ))}
                                             <span>{item.rating === null ? 0 : item.rating}</span>
                                         </div>
                                         <p className="font-fixel text-[16px] mt-[5px]">
-                                            {convertedPrice} {currency}
+                                            {convertPrice()} {currency}
                                         </p>
                                     </div>
                                     <div className="pl-[40px] flex items-center justify-center max-w-[265px] flex-col gap-[10px]">
@@ -162,11 +149,17 @@ const CarouselCategory: React.FC<{ products: Product[] }> = ({ products }) => {
                                             ))}
                                         </select>
                                         <button
-                                            onClick={() => handleAddCart(item, selectedColor)} 
+                                            onClick={() => handleAddCart(item, selectedColor)}
                                             className="py-[6px] bg-black text-white flex items-center justify-center w-full px-[40px] font-fixel text-[14px]"
                                         >
                                             Купить
                                         </button>
+                                        <Link
+                                            className="py-[6px] border border-black  flex items-center justify-center w-full px-[40px] font-fixel text-[14px] mr-[5px]"
+                                            to={`/details/${item.id}`}
+                                        >
+                                            View Details
+                                        </Link>
                                     </div>
                                 </div>
                             );
