@@ -6,8 +6,9 @@ interface ArrowProps {
 
 export { ArrowProps }
 
+
 export type Product = {
-    id: number;
+    id: string; 
     name: string;
     price: number;
     api_featured_image: string;
@@ -18,4 +19,4 @@ export type Product = {
     image_link: string;
 };
 
-export type CartItem = Pick<Product, 'id' | 'name' | 'price' | 'api_featured_image' | 'color'>; // Only the properties needed for the cart item
+export type CartItem = Pick<Product, 'id' | 'name' | 'price' | 'api_featured_image' | 'color'>;
