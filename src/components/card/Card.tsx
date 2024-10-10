@@ -50,6 +50,7 @@ const CustomArrowRight: React.FC<ArrowProps> = ({ className, onClick }) => (
         <img className='w-full h-full' src={Arrow} alt="Right arrow" />
     </div>
 );
+
 interface Product {
     id: string;
     api_featured_image: string;
@@ -78,6 +79,12 @@ const CarouselCategory: React.FC<{ products: Product[] }> = ({ products }) => {
         dispatch(unLike(id));
     };
 
+    // Используем useCurrency вне map
+    const currencyData = products.map(item => {
+        const { currency, convertPrice } = useCurrency(item.price);
+        return { id: item.id, currency, convertedPrice: convertPrice() };
+    });
+
     return (
         <Container>
             <div className="my-[100px]">
@@ -97,9 +104,9 @@ const CarouselCategory: React.FC<{ products: Product[] }> = ({ products }) => {
                         nextArrow={<CustomArrowRight />}
                         prevArrow={<CustomArrowLeft />}
                     >
-                        {products?.map((item) => {
+                        {products?.map((item, index) => {
                             const isLiked = likedProducts.includes(item.id);
-                            const { currency, convertPrice } = useCurrency(item.price);
+                            const { currency, convertedPrice } = currencyData[index]; // Получаем данные валюты по индексу
                             const selectedColor = selectedColors[item.id] || item.product_colors[0]?.hex_value;
 
                             return (
@@ -135,7 +142,7 @@ const CarouselCategory: React.FC<{ products: Product[] }> = ({ products }) => {
                                             <span>{item.rating === null ? 0 : item.rating}</span>
                                         </div>
                                         <p className="font-fixel text-[16px] mt-[5px]">
-                                            {convertPrice()} {currency}
+                                            {convertedPrice} {currency}
                                         </p>
                                     </div>
                                     <div className="pl-[40px] flex items-center justify-center max-w-[265px] flex-col gap-[10px]">

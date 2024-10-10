@@ -15,21 +15,13 @@ const Popbrands = () => {
   console.log(data2)
   useEffect(() => {
     setProducts(data?.slice(0, 20));
-  }, [data]);
-
-  useEffect(() => {
     setProductsv2(data?.slice(45, 55));
   }, [data]);
 
   useEffect(() => {
     setProductsv3(data2?.slice(30, 50));
-  }, [data2]);
-
-  useEffect(() => {
     setProductsv4(data2?.slice(55, 65));
   }, [data2]);
-
-  
 
   if (products === undefined) {
     return (

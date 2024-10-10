@@ -1,3 +1,11 @@
+import { Carousel, ConfigProvider } from 'antd';
+import { Container } from '../../utils';
+import { ArrowProps } from '../../types';
+import '../slider/CarouselHeader.css';
+import Arrow from "../../assets/images/arrow-black.svg";
+import Query from "../../assets/images/query.svg"
+import useCurrency from '../../hooks/useHooks';
+
 export const Users = [
     {
         id: 1,
@@ -10,14 +18,6 @@ export const Users = [
         comments: "Хороший крем для лица, отлично увлажняет и защищает.",
     },
 ];
-
-import { Carousel, ConfigProvider } from 'antd';
-import { Container } from '../../utils';
-import { ArrowProps } from '../../types';
-import '../slider/CarouselHeader.css';
-import Arrow from "../../assets/images/arrow-black.svg";
-import Query from "../../assets/images/query.svg"
-import useCurrency from '../../hooks/useHooks';
 
 const CustomArrowLeft: React.FC<ArrowProps> = ({ className, style, onClick }) => (
     <div
@@ -70,19 +70,23 @@ interface Product {
 }
 
 const Recom: React.FC<{ products: Product[] }> = ({ products }) => {
+    const convertedProducts = products.map(item => {
+        const { currency, convertPrice } = useCurrency(item.price);
+        return { ...item, currency, convertedPrice: convertPrice() };
+    });
+
     return (
         <Container>
             <div className="my-[100px]">
                 <ConfigProvider theme={{ components: { Carousel: {}, }, }}>
                     <Carousel infinite dots={false} slidesToShow={2} slidesToScroll={2} arrows nextArrow={<CustomArrowRight />} prevArrow={<CustomArrowLeft />}>
-                        {products?.map((item, index) => {
+                        {convertedProducts?.map((item, index) => {
                             const userReview = Users[index % Users.length];
-                            const { currency, convertPrice } = useCurrency(item.price);
 
                             return (
-                                <div key={item.id} >
+                                <div key={item.id}>
                                     <div className="p-4 bg-[#FAFAFA] mr-[30px]">
-                                        <div className="flex  items-center">
+                                        <div className="flex items-center">
                                             <img className="w-[200px] h-[200px] object-cover rounded-lg mb-4" src={item.api_featured_image} alt={item.name} />
                                             <div className="text-center relative pl-[20px]">
                                                 <img className='absolute top-[-35px] left-[30px] w-[18px] h-[18px]' src={Query} alt="" />
@@ -91,15 +95,15 @@ const Recom: React.FC<{ products: Product[] }> = ({ products }) => {
                                             </div>
                                         </div>
                                     </div>
-                                    <div className='pl-[16px]' >
-                                        <p className=' pt-[10px] font-fixel text-[14px] hover:text-[#5b24c9]' >
+                                    <div className='pl-[16px]'>
+                                        <p className='pt-[10px] font-fixel text-[14px] hover:text-[#5b24c9]'>
                                             {item.name}
                                         </p>
-                                        <p className=' pt-[4px] text-[#727178] font-fixel text-[12px] hover:text-[#5b24c9] capitalize' >
+                                        <p className='pt-[4px] text-[#727178] font-fixel text-[12px] hover:text-[#5b24c9] capitalize'>
                                             {item.product_type.split('_').join(' ')}
                                         </p>
                                         <p className="font-fixel text-[16px] mt-[5px] text-red-600">
-                                            {convertPrice()} {currency}
+                                            {item.convertedPrice} {item.currency}
                                         </p>
                                     </div>
                                 </div>
