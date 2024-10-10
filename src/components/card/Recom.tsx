@@ -70,10 +70,8 @@ interface Product {
 }
 
 const Recom: React.FC<{ products: Product[] }> = ({ products }) => {
-    // Ensure the `useCurrency` hook is called once
     const { currency, convertPrice } = useCurrency(0);
 
-    // Convert prices for all products
     const convertedProducts = products.map(item => ({
         ...item,
         convertedPrice: convertPrice(),

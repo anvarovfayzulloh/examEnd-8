@@ -20,6 +20,10 @@ export type Product = {
     rating: number;
     product_type: string;
     description: string;
+    product_colors: {
+        hex_value: string;
+        colour_name: string;
+    }
 };
 
 export type CartItem = Pick<Product, 'id' | 'name' | 'price' | 'api_featured_image' | 'color'>;

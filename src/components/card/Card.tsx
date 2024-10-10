@@ -102,7 +102,6 @@ const CarouselCategory: React.FC<{ products: Product[] }> = ({ products }) => {
                         {products.map((item) => {
                             const isLiked = likedProducts.includes(item.id);
 
-                            // Call useCurrency for each product individually
                             const { currency, convertPrice } = useCurrency(item.price);
                             const convertedPrice = convertPrice();
 
