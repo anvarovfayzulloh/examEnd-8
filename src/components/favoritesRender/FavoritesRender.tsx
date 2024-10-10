@@ -4,14 +4,19 @@ import useCurrency from "../../hooks/useHooks";
 import { RootState } from "../../redux/store";
 import { AppDispatch } from "../../redux/store";
 import { useGetProductWithIdQuery } from "../../redux/api/productsApi";
-import { addCart} from "../../redux/slice/addCartSlice"; 
+import { addCart } from "../../redux/slice/addCartSlice";
 import { FcLike, FcLikePlaceholder } from "react-icons/fc";
 import { like, unLike } from "../../redux/slice/likeProducts";
 
-const FavoritesRender: React.FC<{ id: string }> = ({ id }) => {
+interface FavoritesRenderProps {
+    id: string;
+}
+
+const FavoritesRender: React.FC<FavoritesRenderProps> = ({ id }) => {
     const dispatch = useDispatch<AppDispatch>();
     const likedProducts = useSelector((state: RootState) => state.wishlist.liked);
-    const { data } = useGetProductWithIdQuery(id);
+    const { data, error, isLoading } = useGetProductWithIdQuery(id);
+    
     const item = data || {};
     const { currency, convertPrice } = useCurrency(item.price);
     const [selectedColors, setSelectedColors] = useState<{ [key: string]: string }>({});
@@ -20,7 +25,7 @@ const FavoritesRender: React.FC<{ id: string }> = ({ id }) => {
 
     useEffect(() => {
         if (item.id) {
-            setSelectedColors((prev) => ({ ...prev, [item.id]: item.product_colors[0]?.hex_value }));
+            setSelectedColors((prev) => ({ ...prev, [item.id]: item.product_colors?.[0]?.hex_value }));
         }
     }, [item.id, item.product_colors]);
 
@@ -38,67 +43,63 @@ const FavoritesRender: React.FC<{ id: string }> = ({ id }) => {
         }
     };
 
+    if (isLoading) return <p className="text-center">Loading...</p>;
+    if (error) return <p className="text-center">Error loading product</p>;
+
     return (
-        <div key={item.id}>
-            <div className="relative group p-[40px] w-[300px] h-[400px] pb-[5px]">
-                <div className='relative flex justify-center items-center bg-[#fafafa] w-full h-full p-[40px]'>
-                    <img className='object-center object-cover w-full h-full' src={item.api_featured_image} alt={item.name} />
-                    <button
-                        onClick={handleLikeToggle}
-                        aria-label={isLiked ? 'Unlike product' : 'Like product'}
-                    >
-                        {isLiked ? (
-                            <FcLike className={`absolute top-2 right-3 w-6 h-6 transition-opacity duration-200 ${isLiked ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`} />
-                        ) : (
-                            <FcLikePlaceholder className={`absolute top-2 right-3 w-6 h-6 transition-opacity duration-200 ${isLiked ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`} />
-                        )}
-                    </button>
-                </div>
+        <div className="flex flex-col w-[280px]  p-4 bg-white shadow-lg rounded-lg overflow-hidden">
+            <div className="relative flex items-center justify-center h-[250px]">
+                <img 
+                    className="object-cover w-full h-full" 
+                    src={item.api_featured_image} 
+                    alt={item.name} 
+                />
+                <button
+                    onClick={handleLikeToggle}
+                    aria-label={isLiked ? 'Unlike product' : 'Like product'}
+                    className="absolute top-2 right-2 p-2 bg-white rounded-full shadow-md"
+                >
+                    {isLiked ? (
+                        <FcLike className="w-6 h-6 transition-opacity duration-200" />
+                    ) : (
+                        <FcLikePlaceholder className="w-6 h-6 transition-opacity duration-200" />
+                    )}
+                </button>
             </div>
-            <p className="font-fixel text-[16px] overflow-hidden whitespace-nowrap text-ellipsis pr-[61px] pl-[40px]">
-                {item.name}
-            </p>
-            <p className="mt-1 text-[#727178] text-[14px] break-words font-fixel pl-[40px] capitalize">
-                {item.product_type}
-            </p>
-            <div className="pl-[40px] mb-[5px]">
-                <div className="text-[10px] text-[#000] font-fixel mt-[5px]">
+            <h3 className="mt-2 text-lg font-semibold text-gray-800 overflow-hidden text-ellipsis whitespace-nowrap">{item.name}</h3>
+            <p className="mt-1 text-sm text-gray-600 capitalize">{item.product_type}</p>
+            <div className="mt-2 text-sm text-gray-700 flex items-center">
+                <div className="flex">
                     {[...Array(5)].map((_, index) => (
                         <span key={index}>
-                            {index < (item.rating === null ? 0 : item.rating) ? "★" : "☆"}
+                            {index < (item.rating ?? 0) ? "★" : "☆"}
                         </span>
                     ))}
-                    <span>{item.rating === null ? 0 : item.rating}</span>
+                    <span className="ml-1">{item.rating === null ? 0 : item.rating}</span>
                 </div>
-                <p className="font-fixel text-[16px] mt-[5px]">
-                    {convertPrice()} {currency}
-                </p>
             </div>
-            <div className="pl-[40px] flex items-center justify-center max-w-[265px] flex-col gap-[10px]">
+            <p className="mt-1 text-lg font-bold">{convertPrice()} {currency}</p>
+            <div className="mt-2">
                 <select
-                    className="w-full py-2 border border-gray-300 rounded outline-none"
+                    className="w-full p-2 border border-gray-300 rounded"
                     value={selectedColor}
                     onChange={(e) => {
                         setSelectedColors({ ...selectedColors, [item.id]: e.target.value });
                     }}
                 >
                     {item.product_colors?.map((color: any) => (
-                        <option
-                            key={color.hex_value}
-                            value={color.hex_value}
-                            className="text-gray-700 text-[14px] font-fixel"
-                        >
+                        <option key={color.hex_value} value={color.hex_value}>
                             {color.colour_name}
                         </option>
                     ))}
                 </select>
-                <button
-                    onClick={handleAddCart}
-                    className="py-[6px] bg-black text-white flex items-center justify-center w-full px-[40px] font-fixel text-[14px]"
-                >
-                    Купить
-                </button>
             </div>
+            <button
+                onClick={handleAddCart}
+                className="mt-3 py-2 bg-black text-white w-full rounded hover:bg-gray-800 transition duration-200"
+            >
+                Купить
+            </button>
         </div>
     );
 };
