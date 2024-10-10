@@ -4,7 +4,7 @@ import { Carousel, ConfigProvider } from 'antd';
 import { Container } from '../../utils';
 import { ArrowProps } from '../../types';
 import '../slider/CarouselHeader.css';
-import Arrow from "../../assets/images/arrow-black.svg";
+import Arrow from "../../assets/images/arrow-black.svg"
 import { useDispatch, useSelector } from 'react-redux';
 import { like, unLike } from '../../redux/slice/likeProducts';
 import { addCart } from '../../redux/slice/addCartSlice';
@@ -68,11 +68,6 @@ const CarouselCategory: React.FC<{ products: Product[] }> = ({ products }) => {
 
     const [selectedColors, setSelectedColors] = useState<{ [key: string]: string }>({});
 
-    const currencyData = products.map(item => {
-        const { currency, convertPrice } = useCurrency(item.price);
-        return { id: item.id, currency, convertedPrice: convertPrice() };
-    });
-
     const handleAddCart = (item: Product, color: string) => {
         dispatch(addCart({ ...item, color }));
     };
@@ -104,9 +99,13 @@ const CarouselCategory: React.FC<{ products: Product[] }> = ({ products }) => {
                         nextArrow={<CustomArrowRight />}
                         prevArrow={<CustomArrowLeft />}
                     >
-                        {products.map((item, index) => {
+                        {products.map((item) => {
                             const isLiked = likedProducts.includes(item.id);
-                            const { currency, convertedPrice } = currencyData[index]; 
+
+                            // Call useCurrency for each product individually
+                            const { currency, convertPrice } = useCurrency(item.price);
+                            const convertedPrice = convertPrice();
+
                             const selectedColor = selectedColors[item.id] || item.product_colors[0]?.hex_value;
 
                             return (

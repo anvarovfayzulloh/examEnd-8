@@ -3,7 +3,7 @@ import { Container } from '../../utils';
 import { ArrowProps } from '../../types';
 import '../slider/CarouselHeader.css';
 import Arrow from "../../assets/images/arrow-black.svg";
-import Query from "../../assets/images/query.svg"
+import Query from "../../assets/images/query.svg";
 import useCurrency from '../../hooks/useHooks';
 
 export const Users = [
@@ -70,10 +70,15 @@ interface Product {
 }
 
 const Recom: React.FC<{ products: Product[] }> = ({ products }) => {
-    const convertedProducts = products.map(item => {
-        const { currency, convertPrice } = useCurrency(item.price);
-        return { ...item, currency, convertedPrice: convertPrice() };
-    });
+    // Ensure the `useCurrency` hook is called once
+    const { currency, convertPrice } = useCurrency(0);
+
+    // Convert prices for all products
+    const convertedProducts = products.map(item => ({
+        ...item,
+        convertedPrice: convertPrice(),
+        currency,
+    }));
 
     return (
         <Container>
@@ -90,7 +95,9 @@ const Recom: React.FC<{ products: Product[] }> = ({ products }) => {
                                             <img className="w-[200px] h-[200px] object-cover rounded-lg mb-4" src={item.api_featured_image} alt={item.name} />
                                             <div className="text-center relative pl-[20px]">
                                                 <img className='absolute top-[-35px] left-[30px] w-[18px] h-[18px]' src={Query} alt="" />
-                                                <p className="text-left break-words max-w-[300px] font-fixel font-semibold text-[20px] ">{userReview.comments}</p>
+                                                <p className="text-left break-words max-w-[300px] font-fixel font-semibold text-[20px] ">
+                                                    {userReview.comments}
+                                                </p>
                                                 <p className="font-normal text-left ">{userReview.name}</p>
                                             </div>
                                         </div>
