@@ -14,7 +14,7 @@ const Popbrands = () => {
     useEffect(() => {
         console.log(products)
     }, [data])
-    if(products === undefined){return <img src={Loading}/>}
+    if(products === undefined){return <div className="flex justify-center items-center h-screen" ><img src={Loading}/></div>}
     
 
 

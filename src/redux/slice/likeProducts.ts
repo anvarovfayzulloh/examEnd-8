@@ -5,7 +5,7 @@ interface LikedProductState {
 }
 
 const initialState: LikedProductState = {
-    liked: JSON.parse(localStorage.getItem("liked") || "[]"), // Parse the liked items from localStorage
+    liked: JSON.parse(localStorage.getItem("liked") || "[]"),
 };
 
 const likedProductSlice = createSlice({
@@ -14,13 +14,13 @@ const likedProductSlice = createSlice({
     reducers: {
         like: (state, action: PayloadAction<string>) => {
             if (!state.liked.includes(action.payload)) {
-                state.liked.push(action.payload); // Add the liked product to the array
-                localStorage.setItem("liked", JSON.stringify(state.liked)); // Update localStorage
+                state.liked.push(action.payload);
+                localStorage.setItem("liked", JSON.stringify(state.liked));
             }
         },
         unLike: (state, action: PayloadAction<string>) => {
-            state.liked = state.liked.filter(id => id !== action.payload); // Remove the liked product from the array
-            localStorage.setItem("liked", JSON.stringify(state.liked)); // Update localStorage
+            state.liked = state.liked.filter(id => id !== action.payload);
+            localStorage.setItem("liked", JSON.stringify(state.liked));
         },
     },
 });

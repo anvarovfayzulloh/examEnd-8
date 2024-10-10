@@ -31,7 +31,7 @@ const CustomArrowLeft: React.FC<ArrowProps> = ({ className, style, onClick }) =>
     </div>
 );
 
-const CustomArrowRight: React.FC<ArrowProps> = ({ className, style, onClick }) => (
+const CustomArrowRight: React.FC<ArrowProps> = ({ className, onClick }) => (
     <div
         className={`right ${className}`}
         style={{
@@ -62,6 +62,10 @@ interface Product {
 const CarouselCategory: React.FC<{ products: Product[] }> = ({ products }) => {
     const dispatch = useDispatch<AppDispatch>();
     const likedProducts = useSelector((state: RootState) => state.wishlist.liked);
+    const handleAddCart = (id: number) => {
+        console.log(id);
+    }
+
 
     const handleLike = (id: string) => {
         dispatch(like(id));
@@ -129,7 +133,9 @@ const CarouselCategory: React.FC<{ products: Product[] }> = ({ products }) => {
                                             {convertPrice()} {currency}
                                         </p>
                                     </div>
-                                    <button className="group opacity-0 group-hover:opacity-100">Click</button>
+                                    <div className="pl-[40px] flex items-center justify-center max-w-[265px]" >
+                                        <button onClick={() => handleAddCart(item.id)} className=" py-[6px] bg-black text-white flex items-center justify-center w-full px-[40px] font-fixel text-[14px] ">Купить</button>
+                                    </div>
                                 </div>
                             );
                         })}
