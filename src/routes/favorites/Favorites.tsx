@@ -8,7 +8,6 @@ import { addCart } from "../../redux/slice/addCartSlice";
 import { like, unLike } from "../../redux/slice/likeProducts";
 import { FcLike, FcLikePlaceholder } from "react-icons/fc";
 
-
 const Favorites: React.FC = () => {
     const likedProducts = useSelector((state: RootState) => state.wishlist.liked);
 
@@ -33,10 +32,19 @@ interface FavoriteProductProps {
 }
 
 const FavoriteProduct: React.FC<FavoriteProductProps> = ({ id }) => {
-    
     const dispatch = useDispatch<AppDispatch>();
-
     const [selectedColors, setSelectedColors] = useState<{ [key: string]: string }>({});
+
+    const { data: item, isLoading, error } = useGetProductWithIdQuery(id);
+    
+    if (isLoading) return <p>Loading...</p>;
+    if (error) return <p>Error loading product.</p>;
+    if (!item) return <p>No product data found.</p>; 
+
+    const likedProducts = useSelector((state: RootState) => state.wishlist.liked);
+    const isLiked = likedProducts.includes(item.id);
+    const { currency, convertPrice } = useCurrency(item.price);
+    const selectedColor = selectedColors[item.id] || item.product_colors[0]?.hex_value;
 
     const handleAddCart = (item: Product, color: string) => {
         dispatch(addCart({ ...item, color }));
@@ -50,17 +58,6 @@ const FavoriteProduct: React.FC<FavoriteProductProps> = ({ id }) => {
         dispatch(unLike(id));
     };
 
-    const { data: item, isLoading, error } = useGetProductWithIdQuery(id);
-    if (isLoading) return <p>Loading...</p>;
-    if (error) return <p>Error loading product.</p>;
-    const likedProducts = useSelector((state: RootState) => state.wishlist.liked);
-    const isLiked = likedProducts.includes(item.id);
-    const { currency, convertPrice } = useCurrency(item.price);
-    const selectedColor = selectedColors[item.id] || item.product_colors[0]?.hex_value;
-
-
-
-
     return (
         <div key={item.id}>
             <div className="relative group p-[40px] w-[300px] h-[400px] pb-[5px]">
@@ -72,8 +69,8 @@ const FavoriteProduct: React.FC<FavoriteProductProps> = ({ id }) => {
                     >
                         {
                             isLiked
-                                ? <FcLike className={`absolute top-2 right-3 w-6 h-6 transition-opacity duration-200 ${isLiked ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`} />
-                                : <FcLikePlaceholder className={`absolute top-2 right-3 w-6 h-6 transition-opacity duration-200 ${isLiked ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`} />
+                                ? <FcLike className={`absolute top-2 right-3 w-6 h-6 transition-opacity duration-200`} />
+                                : <FcLikePlaceholder className={`absolute top-2 right-3 w-6 h-6 transition-opacity duration-200`} />
                         }
                     </button>
                 </div>
