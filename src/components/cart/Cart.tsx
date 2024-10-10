@@ -1,39 +1,52 @@
-import { useSelector } from "react-redux";
-import { RootState } from "../../redux/store";
-import { Button } from "antd";
-import useCurrency from "../../hooks/useHooks";
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../redux/store/index';
+import { removeCart } from '../../redux/slice/addCartSlice';
+import { CartItem } from '../../types';
+import { Button } from 'antd';
 
 const Cart = () => {
-    const data = useSelector((state: RootState) => state.carts.cartList);
-    console.log(data)
+    const dispatch = useDispatch();
+    const cartList = useSelector((state: RootState) => state.carts.cartList);
+    const handleClearCart = () =>{
+        localStorage.clear();
+        location.reload()
+    }
+    const handleRemoveItem = (item: CartItem) => {
+        dispatch(removeCart(item));
+    };
+
     return (
-        <div className="flex justify-between p-4 w-full gap-[10px]">
-            <div className="flex-1">
-                {data.length > 0 ? (
-                    data.map((item) => {
-                        const { currency, convertPrice } = useCurrency(item.price);
-                        return (
-                            <div key={item.id} className="flex items-center justify-between border-b border-gray-300 py-2">
-                                <img src={item.api_featured_image} className="w-16 h-16 object-cover mr-4" />
-                                <div className="flex-1">
-                                    <h1 className="font-semibold">{item.name}</h1>
-                                    <p className="text-gray-500">Price: {convertPrice()} {currency}</p>
-                                    <p className="text-gray-500">{item.color}</p>
-                                </div>
-                                <div className="flex justify-center items-start h-full" >
-                                    <Button type="link" danger>Remove</Button>
+        <div className="p-4 w-full">
+            <h2 className="text-xl font-semibold mb-4">Shopping Cart</h2>
+            {cartList.length === 0 ? (
+                <p>Your cart is empty.</p>
+            ) : (
+                <div className='flex gap-[20px]' >
+                    <ul className="flex flex-1 flex-col gap-[20px]">
+                    {cartList.map((item) => (
+                        <li key={item.id} className="flex items-center justify-between p-4 border border-gray-200 rounded-lg">
+                            <div className="flex items-center">
+                                <img src={item.api_featured_image} alt={item.name} className="w-16 h-16 object-cover rounded mr-4" />
+                                <div>
+                                    <h3 className="font-medium">{item.name}</h3>
+                                    <p className="text-gray-500">Price: ${item.price}</p>
+                                    <p className="text-gray-500">Color: {item.color}</p>
                                 </div>
                             </div>
-                        )
-                    })
-                ) : (
-                    <div>Your cart is empty.</div>
-                )}
-            </div>
-            <div className="flex flex-col gap-4">
-                <Button type="primary">Checkout</Button>
-                <Button type="primary" danger>Clear</Button>
-            </div>
+                            <button 
+                                onClick={() => handleRemoveItem(item)} 
+                                className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
+                            >
+                                Remove
+                            </button>
+                        </li>
+                    ))}
+                </ul>
+                <div>
+                    <Button onClick={() => handleClearCart()} >Clear</Button> 
+                </div>
+                </div>
+            )}
         </div>
     );
 };

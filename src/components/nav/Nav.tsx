@@ -1,11 +1,11 @@
+import { AiFillCloseCircle } from "react-icons/ai"; 
 import { Link } from "react-router-dom";
 import { Container } from "../../utils";
-import { Tooltip, Modal } from 'antd';
-import Logo from "../../assets/images/logo.svg"
-import Search from "../../assets/images/search.svg"
-import Login from "../../assets/images/login.svg"
-import CartImg from "../../assets/images/cart.svg"
-import Favorites from "../../assets/images/favorites.svg"
+import Logo from "../../assets/images/logo.svg";
+import Search from "../../assets/images/search.svg";
+import Login from "../../assets/images/login.svg";
+import CartImg from "../../assets/images/cart.svg";
+import Favorites from "../../assets/images/favorites.svg";
 import { useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../redux/store/index';
@@ -37,9 +37,7 @@ const Nav = () => {
                 <div className="header-top">
                     <ul className="flex justify-between items-center h-10 border-b border-[#ebebeb] text-[#212121]">
                         <li className="hover:text-[#5b24c9] cursor-pointer font-fixel text-[14px] flex basis-1/4 flex-grow-0 items-center justify-start">
-                            <Tooltip overlayStyle={{ borderRadius: '1px', maxWidth: '264px' }} placement="bottomRight" title="Мы доставляем парфюмерию и косметику бесплатно. Минимальная сумма заказов - 99 000 сумов">
-                                <span>Бесплатная доставка!</span>
-                            </Tooltip>
+                            <span>Бесплатная доставка!</span>
                         </li>
                         <ul className="flex justify-center items-center gap-5 cursor-pointer text-[14px] flex-1">
                             <li className="text-[#ff5252] font-fixel">
@@ -49,7 +47,7 @@ const Nav = () => {
                                 <Link to={location}>Доставка и Оплата</Link>
                             </li>
                             <li className="hover:text-[#5b24c9] cursor-pointer font-fixel text-[14px]">
-                                <Link to={location}>О магазине</Link>
+                                <Link to={location}>O магазине</Link>
                             </li>
                         </ul>
                         <li className="gap-2 hover:text-[#5b24c9] cursor-pointer font-fixel text-[14px] flex basis-1/4 flex-grow-0 items-center justify-end">
@@ -60,21 +58,21 @@ const Nav = () => {
                 </div>
                 <nav className="header-middle flex justify-between items-center pt-[26px]">
                     <div className="flex basis-1/4 flex-grow-0 items-center justify-start">
-                        <button><img src={Search} alt="" /></button>
+                        <button><img src={Search} alt="Search" /></button>
                     </div>
                     <div className="flex flex-1 justify-center">
-                        <Link to={"/"}><img className="w-[160px] h-auto" src={Logo} alt="" /></Link>
+                        <Link to="/"><img className="w-[160px] h-auto" src={Logo} alt="Logo" /></Link>
                     </div>
                     <div className="flex basis-1/4 flex-grow-0 items-center justify-end">
                         <div className="flex justify-end gap-6 items-center pr-[8px]">
-                            <button>
-                                <img className="w-[24px] h-[24px]" src={Login} alt="" />
+                            <button onClick={() => console.log("Login clicked")}>
+                                <img className="w-[24px] h-[24px]" src={Login} alt="Login" />
                             </button>
-                            <button>
-                                <img className="w-[24px] h-[24px]" src={Favorites} alt="" />
+                            <button onClick={() => console.log("Favorites clicked")}>
+                                <img className="w-[24px] h-[24px]" src={Favorites} alt="Favorites" />
                             </button>
                             <button onClick={handleCartView}>
-                                <img className="w-[24px] h-[24px]" src={CartImg} alt="" />
+                                <img className="w-[24px] h-[24px]" src={CartImg} alt="Cart" />
                             </button>
                             <select value={currency} onChange={(e) => handleCurrencyChange(e.target.value)}>
                                 <option value="GBR">Sterling</option>
@@ -86,19 +84,19 @@ const Nav = () => {
                 </nav>
             </Container>
 
-            <Modal
-            width={1000}
-                title="Your Cart"
-                visible={isCartVisible}
-                onCancel={handleCloseCart}
-                footer={null}
-            >
-                <div id="cart-view">
-                    <Cart/>
+            {isCartVisible && (
+                <div className="fixed inset-0 flex items-center justify-center z-50">
+                    <div className="absolute inset-0 bg-black bg-opacity-50" onClick={handleCloseCart} />
+                    <div className="bg-white w-3/4 max-h-[80%] overflow-y-auto rounded-lg p-4 relative">
+                        <button onClick={handleCloseCart} className="absolute top-2 right-2">
+                            <AiFillCloseCircle size={30} />
+                        </button>
+                        <Cart />
+                    </div>
                 </div>
-            </Modal>
+            )}
         </header>
-    )
-}
+    );
+};
 
 export default Nav;

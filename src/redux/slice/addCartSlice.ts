@@ -1,41 +1,42 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { CartItem } from '../../types'; 
 
-interface Product {
-    id: string;
-    api_featured_image: string;
-    name: string;
-    product_type: string;
-    price: number;
-    rating: number | null;
-    product_colors: { hex_value: string; colour_name: string }[];
-}
-
-interface CartItem extends Product {
-    color: string; 
-}
-
-interface AddCartState {
+interface CartState {
     cartList: CartItem[];
 }
 
-const initialState: AddCartState = {
-    cartList: JSON.parse(localStorage.getItem("cart") || "[]") || [],
+const initialState: CartState = {
+    cartList: [],
+};
+
+const updateLocalStorage = (cartList: CartItem[]) => {
+    localStorage.setItem("cart", JSON.stringify(cartList));
 };
 
 const addCartSlice = createSlice({
-    name: "cart",
+    name: 'carts',
     initialState,
     reducers: {
         addCart: (state, action: PayloadAction<CartItem>) => {
-            const existingItem = state.cartList.find(item => item.id === action.payload.id && item.color === action.payload.color);
+            const existingItem = state.cartList.find(
+                item => item.id === action.payload.id && item.color === action.payload.color
+            );
             if (!existingItem) {
                 state.cartList.push(action.payload);
-                localStorage.setItem("cart", JSON.stringify(state.cartList));
+                updateLocalStorage(state.cartList); 
             }
         },
         removeCart: (state, action: PayloadAction<CartItem>) => {
-            state.cartList = state.cartList.filter(item => item.id !== action.payload.id || item.color !== action.payload.color);
-            localStorage.setItem("cart", JSON.stringify(state.cartList));
+            const itemToRemove = state.cartList.find(
+                item => item.id === action.payload.id && item.color === action.payload.color
+            );
+
+            if (itemToRemove) {
+                state.cartList = state.cartList.filter(
+                    item => item.id !== itemToRemove.id || item.color !== itemToRemove.color
+                );
+                updateLocalStorage(state.cartList); 
+            }
         },
     },
 });

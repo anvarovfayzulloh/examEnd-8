@@ -50,7 +50,6 @@ const CustomArrowRight: React.FC<ArrowProps> = ({ className, onClick }) => (
         <img className='w-full h-full' src={Arrow} alt="Right arrow" />
     </div>
 );
-
 interface Product {
     id: string;
     api_featured_image: string;
@@ -68,7 +67,7 @@ const CarouselCategory: React.FC<{ products: Product[] }> = ({ products }) => {
     const [selectedColors, setSelectedColors] = useState<{ [key: string]: string }>({});
 
     const handleAddCart = (item: Product, color: string) => {
-        dispatch(addCart({ ...item, color })); // Dispatch the entire product object
+        dispatch(addCart({ ...item, color }));
     };
 
     const handleLike = (id: string) => {
