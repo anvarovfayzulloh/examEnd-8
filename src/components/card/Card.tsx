@@ -1,5 +1,5 @@
 import { FcLike, FcLikePlaceholder } from "react-icons/fc";
-import React from 'react';
+import React, { useState } from 'react';
 import { Carousel, ConfigProvider } from 'antd';
 import { Container } from '../../utils';
 import { ArrowProps } from '../../types';
@@ -7,6 +7,7 @@ import '../slider/CarouselHeader.css';
 import Arrow from "../../assets/images/arrow-black.svg";
 import { useDispatch, useSelector } from 'react-redux';
 import { like, unLike } from '../../redux/slice/likeProducts';
+import { addCart } from '../../redux/slice/addCartSlice';
 import { AppDispatch, RootState } from '../../redux/store';
 import useCurrency from "../../hooks/useHooks";
 
@@ -57,15 +58,18 @@ interface Product {
     product_type: string;
     price: number;
     rating: number | null;
+    product_colors: { hex_value: string, colour_name: string }[];
 }
 
 const CarouselCategory: React.FC<{ products: Product[] }> = ({ products }) => {
     const dispatch = useDispatch<AppDispatch>();
     const likedProducts = useSelector((state: RootState) => state.wishlist.liked);
-    const handleAddCart = (id: string) => {
-        console.log(id);
-    }
 
+    const [selectedColors, setSelectedColors] = useState<{ [key: string]: string }>({});
+
+    const handleAddCart = (item: Product, color: string) => {
+        dispatch(addCart({ ...item, color })); // Dispatch the entire product object
+    };
 
     const handleLike = (id: string) => {
         dispatch(like(id));
@@ -97,6 +101,8 @@ const CarouselCategory: React.FC<{ products: Product[] }> = ({ products }) => {
                         {products?.map((item) => {
                             const isLiked = likedProducts.includes(item.id);
                             const { currency, convertPrice } = useCurrency(item.price);
+                            const selectedColor = selectedColors[item.id] || item.product_colors[0]?.hex_value;
+
                             return (
                                 <div key={item.id}>
                                     <div className="relative group p-[40px] w-[300px] h-[400px] pb-[5px]">
@@ -133,8 +139,30 @@ const CarouselCategory: React.FC<{ products: Product[] }> = ({ products }) => {
                                             {convertPrice()} {currency}
                                         </p>
                                     </div>
-                                    <div className="pl-[40px] flex items-center justify-center max-w-[265px]" >
-                                        <button onClick={() => handleAddCart(item.id)} className=" py-[6px] bg-black text-white flex items-center justify-center w-full px-[40px] font-fixel text-[14px] ">Купить</button>
+                                    <div className="pl-[40px] flex items-center justify-center max-w-[265px] flex-col gap-[10px]">
+                                        <select
+                                            className="w-full py-2 border border-gray-300 rounded outline-none"
+                                            value={selectedColor}
+                                            onChange={(e) => {
+                                                setSelectedColors({ ...selectedColors, [item.id]: e.target.value });
+                                            }}
+                                        >
+                                            {item.product_colors.map((color) => (
+                                                <option
+                                                    key={color.hex_value}
+                                                    value={color.hex_value}
+                                                    className="text-gray-700 text-[14px] font-fixel"
+                                                >
+                                                    {color.colour_name}
+                                                </option>
+                                            ))}
+                                        </select>
+                                        <button
+                                            onClick={() => handleAddCart(item, selectedColor)} 
+                                            className="py-[6px] bg-black text-white flex items-center justify-center w-full px-[40px] font-fixel text-[14px]"
+                                        >
+                                            Купить
+                                        </button>
                                     </div>
                                 </div>
                             );
