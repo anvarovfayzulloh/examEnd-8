@@ -129,11 +129,11 @@ const SinglePage = () => {
                                     Код: {product.id}
                                     </p>
                                 </div>
-                                <Link to={location} className="text-[#5b24c9]" >
-                                    Нет Нужного обЪема?
+                                <Link to={location} className="text-[#5b24c9] mt-[25px]" >
+                                    Нет Нужного объема?
                                 </Link>
-                                <p className="flex items-center gap-[8px] mt-[10px] text-[#5b24c9]" >
-                                    <BsBoxSeam className="mt-[4px]" /> Бесплатная доставка
+                                <p className="flex items-center gap-[8px] text-[#5b24c9] mt-[10px] font-fixel text-[14px] " >
+                                    <BsBoxSeam className="mt-[-4px]" /> Бесплатная доставка
                                 </p>
                             </div>
                         </div>
