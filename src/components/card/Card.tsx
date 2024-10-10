@@ -62,7 +62,7 @@ interface Product {
 const CarouselCategory: React.FC<{ products: Product[] }> = ({ products }) => {
     const dispatch = useDispatch<AppDispatch>();
     const likedProducts = useSelector((state: RootState) => state.wishlist.liked);
-    const handleAddCart = (id: number) => {
+    const handleAddCart = (id: string) => {
         console.log(id);
     }
 
