@@ -4,6 +4,7 @@ import Menu from '../../components/menu/Menu';
 import CarouselHeader from '../../components/slider/Slider';
 import Categories from '../../components/brands/Categories';
 import Popbrands from '../../components/popbrands/Popbrands';
+import Footer from '../../components/footer/Footer';
 
 const Home: React.FC = () => {
 
@@ -16,6 +17,7 @@ const Home: React.FC = () => {
             <CarouselHeader/>
             <Categories/>
             <Popbrands/>
+            <Footer/>
         </>     
     );
 };

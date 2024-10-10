@@ -7,6 +7,7 @@ import { useGetProductWithIdQuery } from "../../redux/api/productsApi";
 import { addCart } from "../../redux/slice/addCartSlice";
 import { FcLike, FcLikePlaceholder } from "react-icons/fc";
 import { like, unLike } from "../../redux/slice/likeProducts";
+import Loading from "../../assets/images/loading.gif"
 
 interface FavoritesRenderProps {
     id: string;
@@ -43,7 +44,7 @@ const FavoritesRender: React.FC<FavoritesRenderProps> = ({ id }) => {
         }
     };
 
-    if (isLoading) return <p className="text-center">Loading...</p>;
+    if (isLoading) return <img src={Loading} />;
     if (error) return <p className="text-center">Error loading product</p>;
 
     return (

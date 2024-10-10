@@ -80,7 +80,7 @@ const CarouselCategory: React.FC<{ products: Product[] }> = ({ products }) => {
 
     return (
         <Container>
-            <div className="my-[200px]">
+            <div className="my-[100px]">
                 <ConfigProvider
                     theme={{
                         components: {

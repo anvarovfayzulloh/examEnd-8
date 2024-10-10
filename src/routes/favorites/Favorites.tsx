@@ -5,12 +5,14 @@ import FavoritesRender from "../../components/favoritesRender/FavoritesRender";
 import Menu from "../../components/menu/Menu";
 import { NavLink } from "react-router-dom";
 import { Container } from "../../utils";
+import Banner from "../../components/banners/Banner";
 
 const Favorites = () => {
   const likeData = useSelector((state: RootState) => state.wishlist.liked);
 
   return (
     <div className="h-[900px]">
+      <Banner />
       <Container>
         <Nav />
         <Menu />
@@ -34,7 +36,7 @@ const Favorites = () => {
           <div className={`flex flex-wrap  gap-4 ml-[calc(100%/24)]  ${likeData.length > 0 ? 'justify-start' : 'justify-center flex-1'}`}>
             {likeData.length > 0 ? (
               likeData.map(id => (
-                <div key={id} className="flex justify-center items-center w-[270px]"> 
+                <div key={id} className="flex justify-center items-center w-[270px]">
                   <FavoritesRender id={id} />
                 </div>
               ))
