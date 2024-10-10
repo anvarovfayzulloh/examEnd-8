@@ -17,6 +17,8 @@ export type Product = {
     price_sign: string;
     currency: string;
     image_link: string;
+    rating: number;
+    product_type: string;
 };
 
 export type CartItem = Pick<Product, 'id' | 'name' | 'price' | 'api_featured_image' | 'color'>;

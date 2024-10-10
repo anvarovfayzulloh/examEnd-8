@@ -10,6 +10,7 @@ import { like, unLike } from '../../redux/slice/likeProducts';
 import { addCart } from '../../redux/slice/addCartSlice';
 import { AppDispatch, RootState } from '../../redux/store';
 import useCurrency from "../../hooks/useHooks";
+import { Link } from "react-router-dom";
 
 const CustomArrowLeft: React.FC<ArrowProps> = ({ className, style, onClick }) => (
     <div
@@ -67,6 +68,11 @@ const CarouselCategory: React.FC<{ products: Product[] }> = ({ products }) => {
 
     const [selectedColors, setSelectedColors] = useState<{ [key: string]: string }>({});
 
+    const currencyData = products.map(item => {
+        const { currency, convertPrice } = useCurrency(item.price);
+        return { id: item.id, currency, convertedPrice: convertPrice() };
+    });
+
     const handleAddCart = (item: Product, color: string) => {
         dispatch(addCart({ ...item, color }));
     };
@@ -78,12 +84,6 @@ const CarouselCategory: React.FC<{ products: Product[] }> = ({ products }) => {
     const handleUnlike = (id: string) => {
         dispatch(unLike(id));
     };
-
-    // Используем useCurrency вне map
-    const currencyData = products.map(item => {
-        const { currency, convertPrice } = useCurrency(item.price);
-        return { id: item.id, currency, convertedPrice: convertPrice() };
-    });
 
     return (
         <Container>
@@ -104,15 +104,15 @@ const CarouselCategory: React.FC<{ products: Product[] }> = ({ products }) => {
                         nextArrow={<CustomArrowRight />}
                         prevArrow={<CustomArrowLeft />}
                     >
-                        {products?.map((item, index) => {
+                        {products.map((item, index) => {
                             const isLiked = likedProducts.includes(item.id);
-                            const { currency, convertedPrice } = currencyData[index]; // Получаем данные валюты по индексу
+                            const { currency, convertedPrice } = currencyData[index]; 
                             const selectedColor = selectedColors[item.id] || item.product_colors[0]?.hex_value;
 
                             return (
                                 <div key={item.id}>
                                     <div className="relative group p-[40px] w-[300px] h-[400px] pb-[5px]">
-                                        <div className='relative flex justify-center items-center bg-[#fafafa] w-full h-full p-[40px]'>
+                                        <Link to={`/details/${item.id}`} className='relative flex justify-center items-center bg-[#fafafa] w-full h-full p-[40px] '>
                                             <img className='object-center object-cover w-full h-full' src={item.api_featured_image} alt={item.name} />
                                             <button
                                                 onClick={() => isLiked ? handleUnlike(item.id) : handleLike(item.id)}
@@ -124,7 +124,7 @@ const CarouselCategory: React.FC<{ products: Product[] }> = ({ products }) => {
                                                         : <FcLikePlaceholder className={`absolute top-2 right-3 w-6 h-6 transition-opacity duration-200 ${isLiked ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`} />
                                                 }
                                             </button>
-                                        </div>
+                                        </Link>
                                     </div>
                                     <p className="font-fixel text-[16px] overflow-hidden whitespace-nowrap text-ellipsis pr-[61px] pl-[40px]">
                                         {item.name}
