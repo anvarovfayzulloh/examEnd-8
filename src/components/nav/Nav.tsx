@@ -18,7 +18,6 @@ const Nav = () => {
     const dispatch = useDispatch();
     const currency = useSelector((state: RootState) => state.currency.currency);
     const [isCartVisible, setIsCartVisible] = useState(false);
-    const [isModalVisible, setIsModalVisible] = useState(true);
 
 
     const handleCurrencyChange = (newCurrency: string) => {
@@ -29,9 +28,6 @@ const Nav = () => {
         setIsCartVisible(true);
     };
 
-    const handleCloseModal = () => {
-        setIsModalVisible(false);
-      };
 
     const handleCloseCart = () => {
         setIsCartVisible(false);
