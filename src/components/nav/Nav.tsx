@@ -41,25 +41,7 @@ const Nav = () => {
         <header>
             <Container>
                 <div className="header-top">
-                {isModalVisible && (
-          <div className="fixed inset-0 bg-gray-500 bg-opacity-75 flex justify-center items-center z-50 ">
-            <div className="bg-white p-5 rounded shadow-lg text-center  max-w-[420px]">
-              <h2 className="text-xl font-semibold">Important Notice</h2>
-              <p className="mt-4 mb">
-              Please note that the project is done approximately 24 hours before the exam. Thank you for your understanding.
-              </p>
-              <p>
-
-              </p>
-              <button
-                onClick={handleCloseModal}
-                className="mt-4 px-4 py-2 bg-blue-500 text-white rounded"
-              >
-                Close
-              </button>
-            </div>
-          </div>
-        )}
+                
                     <ul className="flex justify-between items-center h-10 border-b border-[#ebebeb] text-[#212121]">
                         <li className="hover:text-[#5b24c9] cursor-pointer font-fixel text-[14px] flex basis-1/4 flex-grow-0 items-center justify-start">
                             <span>Бесплатная доставка!</span>
