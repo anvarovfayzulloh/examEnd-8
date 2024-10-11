@@ -61,7 +61,7 @@ const Nav = () => {
                         <button><img src={Search} alt="Search" /></button>
                     </div>
                     <div className="flex flex-1 justify-center">
-                        <Link to="/"><img className="w-[160px] h-auto" src={Logo} alt="Logo" /></Link>
+                        <a href="/" ><img className="w-[160px] h-auto" src={Logo} alt="Logo" /></a>
                     </div>
                     <div className="flex basis-1/4 flex-grow-0 items-center justify-end">
                         <div className="flex justify-end gap-6 items-center pr-[8px]">
